@@ -1,0 +1,13 @@
+node_modules/
+*.key
+*.pem
+*.old
+*.zip
+credentials.php
+w/
+*.zip
+*.tgz
+LocalSettings.php
+*.log
+Homestead/
+vagrant/
