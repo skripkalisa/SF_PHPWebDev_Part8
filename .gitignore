@@ -11,3 +11,5 @@ LocalSettings.php
 *.log
 Homestead/
 vagrant/
+.env
+dbdata/
