@@ -1,0 +1,21 @@
+<?php include_once VIEW . 'header.phtml';?>
+<a href="/user/index/">Get All Users</a>
+<a href="/user/edit/">Edit User</a>
+<a href="/user/delete/">Delete User</a>
+<h1>Show all Users View</h1>
+
+<?php if (array_key_exists('users', $this->view_data)) {
+    $table = '<table class="table">';
+    foreach ($this->view_data['users'] as $user) {
+        $user_arr = explode(',', $user);
+        $table .= '<tr>';
+        foreach ($user_arr as $u) {
+            $table .= '<td>' . $u . '</td>';
+        }
+        $table .= '</tr>';
+    }
+    $table .= '</table>';
+    echo $table;
+} ?>
+
+<?php include_once VIEW . 'footer.phtml';
