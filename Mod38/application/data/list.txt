@@ -1,7 +1,0 @@
-1,User1,Name1,email1,password1
-2,User2,Name2,email2,password2
-3,User3,Name3,email3,password3
-4,User4,Name4,email4,password4
-5,User5,Name5,email5,password5
-6,User6,Name6,email6,password6
-7,User7,Name7,email7,password7

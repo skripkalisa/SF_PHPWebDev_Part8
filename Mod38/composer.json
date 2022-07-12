@@ -1,0 +1,21 @@
+{
+  "name": "sf/mod38",
+  "description": "Skill Factory PHP course final project",
+  "type": "project",
+  "license": "BSD",
+  "autoload": {
+    "psr-4": {
+      "App\\": "app/"
+    }
+  },
+  "authors": [
+    {
+      "name": "skripkalisa"
+    }
+  ],
+  "minimum-stability": "dev",
+  "require": {
+    "gabordemooij/redbean": "dev-master",
+    "monolog/monolog": "2.x-dev"
+  }
+}

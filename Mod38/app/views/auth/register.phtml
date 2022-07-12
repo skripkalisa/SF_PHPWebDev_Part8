@@ -1,0 +1,102 @@
+<?php
+include_once CORE  .'token.php';
+
+?>
+
+<!-- action=" -->
+
+<?php
+/*
+if (!empty(get_object_vars($entity)) && empty($errors)) {
+    echo
+        '/auth/success';
+} else {
+    echo
+        htmlspecialchars($_SERVER["REQUEST_URI"]);
+}*/
+?>
+<!-- " method="post" -->
+
+<h1>Register</h1>
+
+<form id="register-form">
+    <div class="form-control">
+        <b> Enter First Name: </b>
+        <input type="text" name="firstname"
+            value="<?php echo $entity->firstname ?? '' ;?>">
+        <div class="form-control-feedback"></div>
+        <!-- <span class="error"><?php
+    echo empty($entity->firstname) || !empty($errors['firstname']) ? '*' : '✔️';
+echo $errors['firstname'] ?? '';
+?>
+        </span> -->
+
+    </div>
+
+    <div class="form-control">
+        <b> Enter Last Name: </b>
+        <input type="text" name="lastname" id="lastname"
+            value="<?php echo $entity->lastname ?? '' ;?>">
+        <div class="form-control-feedback"></div>
+
+    </div>
+    <div class="form-control">
+        <b> Enter E-mail: </b>
+        <input type="text" name="email"
+            value="<?php echo $entity->email ?? '' ;?>">
+        <div class="form-control-feedback"></div>
+    </div>
+
+    <div class="form-control">
+        <b> Enter Password: </b>
+        <input type="password" name="password"
+            value="<?php echo $entity->password ?? '' ;?>">
+        <div class="form-control-feedback"></div>
+    </div>
+
+    <div class="form-control">
+        <b> Repeat Password: </b>
+        <input type="password" name="password2"
+            value="<?php echo $password2 ?? '' ;?>">
+        <div class="form-control-feedback"></div>
+    </div>
+
+    <div class="form-control">
+        <b> Select Role: </b>
+        <input type="radio" name="role" <?php if (isset($entity->role) && $entity->role=="merchant") {
+            echo "checked";
+        }?> value="merchant"> Merchant
+
+        <input type="radio" name="role" <?php if (isset($entity->role) && $entity->role=="webmaster") {
+            echo "checked";
+        }?> value="webmaster"> Web-master
+
+        <!-- <input type="radio" name="role" <?php if (isset($entity->role) && $entity->role=="other") {
+            echo "checked";
+        }?> value="other"> Other -->
+
+        <!-- <span class="error"><?php
+                                                                                                                                                        echo empty($entity->role) ? '*' : '✔️';
+echo $errors['role'] ?? '';
+?>
+        </span> -->
+        <div class="form-control-feedback"></div>
+    </div>
+
+    <input type="hidden" name="token" value="<?=$token?>">
+
+    <button type="submit" name="submit" value="Register">Register
+    </button>
+
+</form>
+<?php
+$_SESSION["CSRF"] = $token;
+
+
+$users = App\data\getAll('users');
+
+foreach ($users as $user) {
+    foreach ($user as $key => $value) {
+        echo $key . ': ' . $value . '<br>';
+    }
+}

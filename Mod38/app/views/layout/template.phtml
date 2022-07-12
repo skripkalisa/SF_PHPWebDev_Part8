@@ -1,0 +1,66 @@
+<?php
+$main_title = 'Профессия Веб-разработчик | Модуль 38. Финальный проект';
+if (isset($_SESSION['title'])) {
+    $title = $_SESSION['title'];
+} else {
+    $title = $main_title;
+}
+
+?>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="description" content="site template">
+  <meta name="description" content="main page">
+  <meta name="author" content="skripkalisa">
+  <meta name="robots" content="all">
+  <meta name="description" content="website, template">
+  <meta name="description" content="main page, template">
+  <meta property="og:url" content="https://full-link-to-your.site">
+  <meta property="og:title" content="Template | Main Page">
+  <meta property="og:description">
+  <meta property="og:image" content="/assets/img/icon/favicon-96x96.png">
+  <meta property="og:locale" content="ru">
+  <link rel="icon" type="image/png" href="/assets/img/icon/favicon-16x16.png" sizes="16x16">
+  <link rel="icon" type="image/png" href="/assets/img/icon/favicon-32x32.png" sizes="32x32">
+  <link rel="icon" type="image/png" href="/assets/img/icon/favicon-96x96.png" sizes="96x96">
+  <title><?= $title ?? $main_title ?>
+  </title>
+
+
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="http://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+  <link href="http://fonts.googleapis.com/css?family=Kreon" rel="stylesheet">
+  <!-- <link href="https://fonts.googleapis.com/css2?family=Kreon:wght@400;700&display=swap" rel="stylesheet"> -->
+  <link rel="stylesheet" href="/assets/css/style.css" />
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+  <script defer src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+  <script defer src="/assets/js/app.js"></script>
+</head>
+
+<body>
+  <noscript>Ваш браузер не поддерживает JavaScript!</noscript>
+
+  <div class="wrapper">
+    <?php include LAYOUT . 'parts/header.phtml'; ?>
+    <!-- <?php include LAYOUT . 'parts/aside.phtml'; ?>
+    -->
+
+
+    <main class="main">
+      <?php include VIEW . $content_view; ?>
+    </main>
+
+    <!-- <?php include LAYOUT . 'parts/footer.phtml'; ?>
+    -->
+
+
+  </div>
+</body>
