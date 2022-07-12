@@ -18,6 +18,8 @@ if (!empty($_POST)) {
             
           
             $user = new User($userVM);
+            // var_dump($user);
+            
             $user->dropTable('users');
             // $user->save();
             $userId = App\data\create($user, 'users');

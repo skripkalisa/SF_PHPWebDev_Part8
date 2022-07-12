@@ -25,53 +25,54 @@ function getById(string $table, int $id)
 
     return $obj;
 }
+function getByProp(string $table, string $prop, string $value)
+{
+    $obj = R::findOne($table, "$prop = ?", [$value]);
+
+    return $obj;
+}
 
 function getUserByToken($token)
 {
     $user = R::findOne('users', 'token = ?', [$token]);
-    // var_dump($user);
 
     return $user;
 }
 
-function getEntity(object $entity, object $bean)
+function getBeanEntity(object $entity, object $bean)
 {
-    $values = array_values(get_object_vars($entity));
-    $keys = array_keys(get_class_vars(get_class($entity)));
-    foreach ($keys as $key => $value) {
-        if ($value == 'bean') {
-            break;
-        }
-        $bean->$value = $values[$key];
+    $reflection = new \ReflectionClass($entity);
+    $props = $reflection->getProperties(\ReflectionProperty::IS_PRIVATE | \ReflectionProperty::IS_PROTECTED | \ReflectionProperty::IS_PUBLIC);
+    foreach ($props as $prop) {
+        $prop->setAccessible(true);
+        $propName = $prop->getName();
+        $propValue = $prop->getValue($entity);
+        $bean->$propName = $propValue;
     }
 
     return $bean;
 }
 
-function create(object $entity, string $table)
+function create(object $classEntity, string $table)
 {
     $bean = R::dispense($table);
-    // foreach ($entity as $key => $value) {
-    //     $bean->$key = $value;
-    // }
-    $obj = getEntity($entity, $bean);
+    $obj = getBeanEntity($classEntity, $bean);
     $id = R::store($obj);
 
     return $id;
 }
 
-function update(object $entity, string $table)
+function update(object $classEntity, string $table)
 {
     $bean = R::load($table, $entity->id);
-    foreach ($entity as $key => $value) {
-        $bean->$key = $value;
-    }
-    $id = R::store($bean);
+    $obj = getBeanEntity($classEntity, $bean);
+
+    $id = R::store($obj);
 
     return $id;
 }
 
-function delete(int $entity, string $table)
+function delete(int $id, string $table)
 {
     $bean = R::load($table, $id);
     R::trash($bean);

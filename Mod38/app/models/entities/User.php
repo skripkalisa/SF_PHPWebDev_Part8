@@ -8,13 +8,13 @@ use \RedBeanPHP\R as R;
 
 class User extends \RedBeanPHP\SimpleModel
 {
-    protected $firstName;
-    protected $lastName;
-    protected $email;
-    protected $password;
-    protected $role;
-    protected $created;
-    protected $token;
+    private $firstName;
+    private $lastName;
+    private $email;
+    private $password;
+    private $role;
+    private $created;
+    private $token;
 
     public function __construct($entity = null)
     {
