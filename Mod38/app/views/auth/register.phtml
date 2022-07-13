@@ -66,7 +66,7 @@ if (utils\getLoginStatus()) {
     }?> value="other"> Other -->
 
     <!-- <span class="error"><?php
-                                                                                                                                                                                echo empty($entity->role) ? '*' : '✔️';
+                                                                                                                                                                                    echo empty($entity->role) ? '*' : '✔️';
 echo $errors['role'] ?? '';
 ?>
     </span> -->
@@ -81,12 +81,3 @@ echo $errors['role'] ?? '';
 </form>
 <?php
 $_SESSION["CSRF"] = $token;
-
-
-$users = App\data\getAll('users');
-
-foreach ($users as $user) {
-    foreach ($user as $key => $value) {
-        echo $key . ': ' . $value . '<br>';
-    }
-}

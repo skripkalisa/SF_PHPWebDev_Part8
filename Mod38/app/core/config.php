@@ -15,3 +15,6 @@ define('SECRET_WORD', $secret_word);
 
 $passwordRegExp = "/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/";
 define('PASSWORD_REGEXP', $passwordRegExp);
+
+$nameRegExp = "/^[a-zA-Zа-яА-ЯЁё]*$/u";
+define('NAME_REGEXP', $nameRegExp);

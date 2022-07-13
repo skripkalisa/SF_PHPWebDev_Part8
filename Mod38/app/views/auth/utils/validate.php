@@ -10,7 +10,7 @@ function validateRegForm(array $request)
 
     if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["token"]) && $_POST["token"] == $_SESSION["CSRF"]) {
         if (empty($_POST["username"])) {
-            $errors[]['username'] = "First Name Field is required";
+            $errors[]['username'] = "Username Field is required";
         } else {
             $entity->username = test_input($_POST["username"]);
             if (!preg_match("/^[a-zA-Zа-яА-ЯЁё]*$/u", $entity->username)) {
@@ -18,14 +18,6 @@ function validateRegForm(array $request)
             }
         }
 
-        // if (empty($_POST["lastname"])) {
-        //     $errors[]['lastname'] = "Last Name Field is required";
-        // } else {
-        //     $entity->lastname = test_input($_POST["lastname"]);
-        //     if (!preg_match("/^[a-zA-Zа-яА-ЯЁё]*$/u", $entity->lastname)) {
-        //         $errors[]['lastname'] = "Only letters allowed";
-        //     }
-        // }
         if (empty($_POST["email"])) {
             $errors[]['email'] = "Email field is required";
         } else {
@@ -52,16 +44,6 @@ function validateRegForm(array $request)
         } else {
             $password2 = test_input($_POST["password2"]);
         }
-        
-        // if (empty($_POST["role"])) {
-        //     $errors[]['role'] = "Role field is required";
-        // } else {
-        //     $entity->role = test_input($_POST["role"]);
-
-        //     if (!Roles::isValidValue($entity->role)) {
-        //         $errors[]['role'] = "Invalid role";
-        //     }
-        // }
     }
     return $errors;
 }

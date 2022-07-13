@@ -1,49 +1,5 @@
 <h1>Create Profile</h1>
 
-
-
-<form id="profile-form">
-  <div class="form-control">
-    <b> Enter First Name: </b>
-    <input type="text" name="username"
-      value="<?php echo $entity->username ?? '' ;?>">
-    <div class="form-control-feedback"></div>
-
-
-  </div>
-
-  <div class="form-control">
-    <b> Enter Last Name: </b>
-    <input type="text" name="lastname" id="lastname"
-      value="<?php echo $entity->lastname ?? '' ;?>">
-    <div class="form-control-feedback"></div>
-
-  </div>
-
-
-
-
-  <div class="form-control">
-    <b> Select Role: </b>
-    <input type="radio" name="role" <?php if (isset($entity->role) && $entity->role==="merchant") {
-        echo "checked";
-    }?> value="merchant"> Merchant
-
-    <input type="radio" name="role" <?php if (isset($entity->role) && $entity->role==="webmaster") {
-        echo "checked";
-    }?> value="webmaster"> Web-master
-
-    <input type="radio" name="role" <?php if (isset($entity->role) && $entity->role==="other") {
-        echo "checked";
-    }?> value="other"> Other
-
-
-    <div class="form-control-feedback"></div>
-  </div>
-
-  <input type="hidden" name="token" value="<?=$token?>">
-
-  <button type="submit" name="submit" value="Register">Register
-  </button>
-
-</form>
+<?php
+include_once CORE . 'token.php';
+include_once 'form.phtml';

@@ -46,4 +46,12 @@ class Dashboard extends core\Controller implements core\ICrudController
     {
         return $name;
     }
+
+    public function validate(array $payload = null)
+    {
+        $this->_view->generate('dashboard/utils/handler.php', '../dashboard/utils/handler.php', $payload);
+
+       
+        return $payload;
+    }
 }
