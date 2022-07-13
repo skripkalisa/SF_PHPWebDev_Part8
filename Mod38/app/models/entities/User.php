@@ -8,28 +8,19 @@ use \RedBeanPHP\R as R;
 
 class User extends \RedBeanPHP\SimpleModel
 {
-    private $firstName;
-    private $lastName;
+    private $username;
     private $email;
     private $password;
-    private $role;
     private $created;
     private $token;
 
     public function __construct($entity = null)
     {
-        $this->firstName = $entity->firstname;
-        $this->lastName = $entity->lastname;
+        $this->username = $entity->username;
         $this->email = $entity->email;
         $this->password = $entity->password;
-        if (Roles::isValidValue($entity->role)) {
-            $this->role = $entity->role;
-        } else {
-            $this->role = Roles::UNSET;
-        }
-        $this->token = $entity->token;
-
         $this->created = \DateTime::createFromFormat('U', time());
+        $this->token = $entity->token;
     }
 
     public function getClassValues()

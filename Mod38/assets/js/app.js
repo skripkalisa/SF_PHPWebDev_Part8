@@ -29,29 +29,32 @@ async function postData(url = '', data = new FormData()) {
   return response.json() // parses JSON response into native JavaScript objects
 }
 
-var reqUrl = '/auth/validate'
-const regForm = document.querySelector('#register-form')
-
-regForm?.addEventListener('submit', e => {
+const handleForm = (e, url) => {
   e.preventDefault()
   const data = new FormData(e.target)
 
-  postData(reqUrl, data)
+  postData(url, data)
     .then(data => {
       data.success ? success(data) : errors(data)
     })
     .catch(error => {
       console.log(error)
     })
-})
+}
+var regUrl = '/auth/validate/register'
+const regForm = document.querySelector('#register-form')
+
+regForm?.addEventListener('submit', e => handleForm(e, regUrl))
+
+var loginUrl = '/auth/validate/login'
+const loginForm = document.querySelector('#login-form')
+
+loginForm?.addEventListener('submit', e => handleForm(e, loginUrl))
+// loginForm?.addEventListener('click', e => console.log(e.target))
 
 const success = data => {
   resetErrors()
-  modalSuccess()
-  console.log('success', data.entity)
-  console.log('keys', data.keys)
-  console.log('values', data.values)
-  console.log('userId', data.userId)
+  modalSuccess(data)
 }
 
 const errors = data => {
@@ -97,44 +100,55 @@ const getNextSibling = (elem, selector) => {
   }
 }
 
-const modalSuccess = () => {
+const modalSuccess = data => {
   // Get the modal
+  const status = data.status
+
+  const response = {
+    status,
+    link: '/',
+    page: 'Home',
+  }
+  if (status === 'registered') {
+    response.link = '/auth/login'
+    response.page = 'Login'
+  }
+  if (status === 'logged in') {
+    response.link = '/dashboard'
+    response.page = 'Dashboard'
+  }
+
+  // console.log(data)
   const div = document.createElement('div')
   const modalForm = `
   <div id="myModal" class="modal">
 
-  <!-- Modal content -->
   <div class="modal-content">
     <div class="modal-header">
       <span class="close">&times;</span>
       <h2>Success!</h2>
     </div>
     <div class="modal-body">
-      <p>You have successfully registered</p>
-      <p>and will be redirected to Login page</p>
+      <p>You have successfully ${response.status}</p>
+      <p>and will be redirected to <a href="${response.link}">${response.page}</a> page</p>
     </div>
     <div class="modal-footer">
-      <h3>or click the link below</h3>
-      <a href="/auth/login">Login</a>
-    </div>
+      <h3>or click the link above</h3>
+      <!-- <a href="${response.link}">${response.page}</a>
+    </div>--!>
   </div>
 
 </div>
   `
   div.innerHTML = modalForm
   const wrapper = document.querySelector('.wrapper')
-  console.log(wrapper)
+
   wrapper.appendChild(div)
   const modal = document.getElementById('myModal')
-
-  // Get the button that opens the modal
-  // var btn = document.getElementById('myBtn')
 
   // Get the <span> element that closes the modal
   var span = document.getElementsByClassName('close')[0]
 
-  // When the user clicks the button, open the modal
-  // btn.onclick = function () {}
   modal.style.display = 'block'
 
   // When the user clicks on <span> (x), close the modal
@@ -148,7 +162,8 @@ const modalSuccess = () => {
       modal.style.display = 'none'
     }
   }
-  // setTimeout(() => {
-  //   location.href = '/auth/login'
-  // }, 3000)
+
+  setTimeout(() => {
+    location.href = response.link
+  }, 2500)
 }

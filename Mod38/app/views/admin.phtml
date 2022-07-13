@@ -1,5 +1,50 @@
 <h1>Admin</h1>
 
 <?php
+$users = App\data\getAll('users');
+$usersArray = [];
+$userKeys = [];
+$skip = ['password', 'token', 'bean'];
+foreach ($users as $user) {
+    $newUser = [];
+    foreach ($user as $key => $value) {
+        if (in_array($key, $skip)) {
+            continue;
+        }
+        $newUser[] = $value;
 
-$_SESSION['title'] = 'Admin';
+        if (in_array($key, $userKeys)) {
+            continue;
+        }
+        $userKeys[] = $key;
+    }
+    array_push($usersArray, $newUser);
+}
+
+?>
+<h3>Users</h3>
+<table>
+  <thead>
+    <tr><?php
+foreach ($userKeys as $key) {
+    echo '<th>'.$key.'</th>';
+}
+?>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <?php
+foreach ($usersArray as $user) {
+    ?>
+    <tr>
+      <?php
+    foreach ($user as $key => $value) {
+        echo '<td>'.$value.'</td>';
+    } ?>
+    </tr>
+    <?php
+}?>
+    </tr>
+  </tbody>
+</table>

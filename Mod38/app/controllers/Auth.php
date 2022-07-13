@@ -2,7 +2,9 @@
 
 namespace App\controllers;
 
-class Auth extends \App\core\Controller implements \App\core\IAuthController
+use App\core;
+
+class Auth extends core\Controller implements core\IAuthController
 {
     public function __construct()
     {
@@ -29,9 +31,9 @@ class Auth extends \App\core\Controller implements \App\core\IAuthController
         $this->_view->generate('auth/success.phtml', 'template.phtml');
     }
 
-    public function validate()
+    public function validate(array $payload = null)
     {
-        $this->_view->generate('auth/utils/handler.php', '../auth/utils/handler.php');
+        $this->_view->generate('auth/utils/authHandler.php', '../auth/utils/authHandler.php', $payload);
     }
 
     public function logout()

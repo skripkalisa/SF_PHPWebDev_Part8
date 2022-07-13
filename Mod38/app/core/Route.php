@@ -2,11 +2,8 @@
 
 namespace App\core;
 
-// use App\controllers\Home;
-// use App\controllers\Webmaster;
-// use App\controllers\Admin;
-// use App\controllers\Error;
-// use App\controllers\Auth;
+include_once VIEW  .'auth/utils/formHandler.php';
+
 
 define('CONTROLLERS_NAMESPACE', 'App\\controllers\\');
 
@@ -15,56 +12,56 @@ class Route
     public static function start()
     {
         // контроллер и действие по умолчанию
-        $controller_classname = 'home';
+        $controlleClassname = 'home';
         $model = null;
-        $action_name = 'index';
-        $action_id = '';
+        $actionName = 'index';
+        $payload = [];
         $routes = explode(DIRECTORY_SEPARATOR, $_SERVER['REQUEST_URI']);
 
         if (!empty($routes[1])) {
-            $controller_classname = $routes[1];
+            $controlleClassname = $routes[1];
         }
 
         // получаем имя экшена
         if (!empty($routes[2])) {
-            $action_name = $routes[2];
+            $actionName = $routes[2];
         }
         // получаем id
         if (!empty($routes[3])) {
-            $action_id = $routes[3];
+            $payload = array_slice($routes, 2);
         }
-        // (var_dump($action_id));
+        // (var_dump($payload));
         // добавляем префиксы
-        $controller_name = CONTROLLERS_NAMESPACE . ucfirst($controller_classname);
-        // $controller_name = ucfirst($controller_filename).'Controller';
-        $model_name = $controller_name;
+        $controllerName = CONTROLLERS_NAMESPACE . ucfirst($controlleClassname);
+        // $controllerName = ucfirst($controllerFilename).'Controller';
+        $modelName = $controllerName;
 
         // подцепляем файл с классом модели (файла модели может и не быть)
-        $model_file = strtolower($model_name).'.php';
-        $model_path = MODEL.$model_file;
-        if (file_exists($model_path)) {
-            include_once MODEL.$model_file;
-            $model = new $model_name();
+        $modelFile = strtolower($modelName).'.php';
+        $modelPath = MODEL.$modelFile;
+        if (file_exists($modelPath)) {
+            include_once MODEL.$modelFile;
+            $model = new $modelName();
         }
 
         // подцепляем файл с классом контроллера
-        $controller_file = ucfirst(strtolower($controller_classname)).'.php';
-        $controller_path = CONTROLLER.$controller_file;
+        $controllerFile = ucfirst(strtolower($controlleClassname)).'.php';
+        $controller_path = CONTROLLER.$controllerFile;
 
         if (file_exists($controller_path)) {
-            include_once CONTROLLER.$controller_file;
+            include_once CONTROLLER.$controllerFile;
         } else {
             Route::ErrorPage404();
         }
 
         // создаем контроллер
 
-        $controller = new  $controller_name($model);
-        $action = $action_name;
+        $controller = new  $controllerName($model);
+        $action = $actionName;
 
         if (method_exists($controller, $action)) {
             // вызываем действие контроллера
-            $controller->$action($action_id);
+            $controller->$action($payload);
         } else {
             Route::ErrorPage404();
         }

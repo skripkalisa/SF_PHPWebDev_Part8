@@ -1,34 +1,46 @@
 <?php
+
 include_once CORE  .'token.php';
 include_once VIEW  .'auth/utils/formHandler.php';
-login();
+use App\views\auth\utils;
 
-if (getLoginStatus()) {
-    header("location: /home/profile");
+if (utils\getLoginStatus()) {
+    header("location: /dashboard");
     exit;
 }
 ?>
 
 
-<form action="<?php echo htmlspecialchars($_SERVER["REQUEST_URI"]);?>
-" method="post">
-  <table>
-    <tr>
-      <td>Email:</td>
-      <td> <input type="email" name="email" /></td>
-    </tr>
-    <tr>
-      <td>Password:</td>
-      <td> <input type="password" name="password" /></td>
-    </tr>
-    <input type="hidden" name="token" value="<?=$token?>">
-    <tr>
-      <td colspan="2"><input type="submit" value="login" /> </td>
-    </tr>
-  </table>
+<form id="login-form">
+
+  <div class="form-control">
+    <b> Enter E-mail: </b>
+    <input type="text" name="email"
+      value="<?php echo $entity->email ?? '' ;?>">
+    <div class="form-control-feedback"></div>
+  </div>
+
+  <div class="form-control">
+    <b> Enter Password: </b>
+    <input type="password" name="password"
+      value="<?php echo $entity->password ?? '' ;?>">
+    <div class="form-control-feedback"></div>
+  </div>
+  <input type="hidden" name="token" value="<?=$token?>">
+
+  <div class="form-control">
+    <input class="form-check-input" type="checkbox" value="remember" id="flexCheckDefault" name="remember">
+    <label class="form-check-label" for="flexCheckDefault">
+      Remember me
+    </label>
+  </div>
+  <input type="submit" value="Login" />
+
 </form>
 
 
 <?php
-include_once CORE  .'token.php';
+
 $_SESSION["CSRF"] = $token;
+// action="<?php echo htmlspecialchars($_SERVER["REQUEST_URI"]);?>
+<!-- // " method="post" -->

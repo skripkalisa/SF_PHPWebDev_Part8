@@ -1,0 +1,45 @@
+<h1>Profile Index</h1>
+<nav class="sub-nav">
+  <ul class="sub-nav_menu_list">
+
+
+    <li class="sub-nav_menu_list_item first active"><a href="/dashboard/show/profile">Profile</a></li>
+    <li class="sub-nav_menu_list_item"><a href="/dashboard/create/profile">Create Profile</a></li>
+    <li class="sub-nav_menu_list_item"><a href="/dashboard/edit/profile">Edit Profile</a></li>
+    <li class="sub-nav_menu_list_item"><a href="/dashboard/delete/profile">Delete Profile</a></li>
+
+
+
+
+  </ul>
+</nav>
+<section class="manage profile">
+  <?php
+
+if ($payload && $payload[1]) {
+    if ($payload[1] == 'profile') {
+        switch ($payload[0]) {
+            case 'show':
+                include VIEW . 'dashboard/profile/show.phtml';
+                break;
+            case 'edit':
+                include VIEW . 'dashboard/profile/edit.phtml';
+                break;
+
+            case 'delete':
+
+                include VIEW . 'dashboard/profile/delete.phtml';
+                break;
+
+            case 'create':
+                include VIEW . 'dashboard/profile/create.phtml';
+                break;
+                
+            default:
+                header("location: /dashboard");
+                break;
+        }
+    }
+}
+  ?>
+</section>

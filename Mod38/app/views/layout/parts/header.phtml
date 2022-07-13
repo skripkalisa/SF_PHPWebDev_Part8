@@ -1,17 +1,31 @@
-    <header class="header">
-      <div class="logo">
-        <a href="/">Skripkalisa <span class="cms">LLC</span></a>
-      </div>
-      <nav class="navbar">
-        <ul class="menu list">
-          <li class="first active"><a href="/">Home</a></li>
-          <li><a href="/admin">Admin</a></li>
-          <li><a href="/merchant">Merchant</a></li>
-          <li><a href="/webmaster">Web Master</a></li>
-          <li><a href="/auth/register">Register</a></li>
-          <li><a href="/auth/login">Login</a></li>
-          <li><a href="/auth/logout">Logout</a></li>
+<?php
+include_once VIEW  .'auth/utils/formHandler.php';
 
-        </ul>
-      </nav>
-    </header>
+use App\views\auth\utils;
+
+?>
+<header class="header">
+  <div class="logo">
+    <a href="/">Skripkalisa <span class="cms">LLC</span></a>
+  </div>
+  <nav class="navbar">
+    <ul class="menu list">
+      <li class="first active"><a href="/">Home</a></li>
+      <?php if (utils\getLoginStatus()): ?>
+      <?php if (utils\isAdmin()): ?>
+      <li><a href="/admin">Admin</a></li>
+      <?php endif; ?>
+
+
+      <li><a href="/dashboard">Dashboard</a></li>
+      <li><a href="/auth/logout">Logout</a></li>
+
+      <?php else: ?>
+
+      <li><a href="/auth/register">Register</a></li>
+      <li><a href="/auth/login">Login</a></li>
+      <?php endif;?>
+
+    </ul>
+  </nav>
+</header>

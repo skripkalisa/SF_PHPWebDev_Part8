@@ -9,5 +9,9 @@ define('VIEW_MODEL', ROOT. 'app' . DIRECTORY_SEPARATOR . 'view_models'. DIRECTOR
 define('VIEW', ROOT. 'app' . DIRECTORY_SEPARATOR . 'views'. DIRECTORY_SEPARATOR);
 define('CONTROLLER', ROOT. 'app' . DIRECTORY_SEPARATOR . 'controllers'. DIRECTORY_SEPARATOR);
 define('LAYOUT', VIEW .  'layout'. DIRECTORY_SEPARATOR);
+
 $secret_word = 'woodchuck';
 define('SECRET_WORD', $secret_word);
+
+$passwordRegExp = "/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/";
+define('PASSWORD_REGEXP', $passwordRegExp);

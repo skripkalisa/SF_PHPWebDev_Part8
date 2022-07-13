@@ -32,7 +32,7 @@ function getByProp(string $table, string $prop, string $value)
     return $obj;
 }
 
-function getUserByToken($token)
+function getUserByToken(string $token)
 {
     $user = R::findOne('users', 'token = ?', [$token]);
 
