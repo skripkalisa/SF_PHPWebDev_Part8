@@ -1,45 +1,73 @@
 <?php
+
 namespace App\views\dashboard;
 
-include_once VIEW.'auth/utils/formHandler.php';
 use App\views\auth\utils;
 
-if (!utils\getLoginStatus()) {
+if (!utils\HandleAuth::getLoginStatus()) {
     header('location: /');
     exit;
 }
 
-$name = $_SESSION['username']; //receiving name field value in $name variable
+$name = $_SESSION['username'];
 
-$token = $_SESSION['token']; //receiving password field value in $password variable
+$token = $_SESSION['token'];
 
 echo "Welcome: $name, your token is: $token"; ?>
 <aside class="aside">
-
   <nav class="aside_nav">
     <ul class="aside_nav_list">
       <li class="aside_nav_list_item"><a href="/dashboard/show/profile">Profile</a></li>
       <li class="aside_nav_list_item"><a href="/dashboard/show/account">Account</a></li>
     </ul>
   </nav>
-
 </aside>
 
 <section class="dashboard">
   <h1>Dashboard</h1>
   <?php
 if ($payload && $payload[1]) {
-    switch ($payload[1]) {
-        case 'profile':
-            include VIEW.'dashboard/profile/index.phtml';
+    if ($payload[1] === 'profile' || $payload[1] === 'account') {
+        ?>
+
+  <nav class="sub-nav">
+    <ul class="sub-nav_menu_list">
+      <li class="sub-nav_menu_list_item first active"><a
+          href="/dashboard/show/<?php echo $payload[1]; ?>"><?php echo 'View '.\ucfirst($payload[1]); ?></a>
+      </li>
+      <li class="sub-nav_menu_list_item"><a
+          href="/dashboard/create/<?php echo $payload[1]; ?>"><?php echo 'Create '.\ucfirst($payload[1]); ?></a>
+      </li>
+      <li class="sub-nav_menu_list_item"><a
+          href="/dashboard/edit/<?php echo $payload[1]; ?>"><?php echo 'Edit '.\ucfirst($payload[1]); ?></a>
+      </li>
+      <li class="sub-nav_menu_list_item"><a
+          href="/dashboard/delete/<?php echo $payload[1]; ?>"><?php echo 'Delete'.\ucfirst($payload[1]); ?></a>
+      </li>
+    </ul>
+  </nav>
+
+  <?php
+    switch ($payload[0]) {
+        case 'show':
+            include VIEW.'dashboard/crud/'.$payload[0].'.phtml';
             break;
-        case 'account':
-            include VIEW.'dashboard/account/index.phtml';
+        case 'edit':
+            include VIEW.'dashboard/crud/'.$payload[0].'.phtml';
+            break;
+
+        case 'delete':
+            include VIEW.'dashboard/crud/'.$payload[0].'.phtml';
+            break;
+
+        case 'create':
+            include VIEW.'dashboard/crud/'.$payload[0].'.phtml';
             break;
 
         default:
             header('location: /dashboard');
             break;
+    }
     }
 }
 

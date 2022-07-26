@@ -47,7 +47,11 @@ function getBeanEntity(object $entity, object $bean)
         $prop->setAccessible(true);
         $propName = $prop->getName();
         $propValue = $prop->getValue($entity);
-        $bean->$propName = $propValue;
+        if($propName === 'bean') {
+            continue;
+        }else{
+            $bean->$propName = $propValue;
+        }
     }
 
     return $bean;
@@ -77,7 +81,10 @@ function delete(int $id, string $table)
     $bean = R::load($table, $id);
     R::trash($bean);
 }
-
+    function dropTable(string $table)
+    {
+        \RedBeanPHP\R::exec("DROP TABLE IF EXISTS $table");
+    }
 function getConnection()
 {
     // require CORE . '/config/credentials.php';

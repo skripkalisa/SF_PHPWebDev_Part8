@@ -1,0 +1,38 @@
+<?php
+
+namespace App\views\dashboard\crud;
+
+use App\views\auth\utils\HandleData;
+
+if ($payload && $payload[1]) {
+    echo "<h3>". \ucfirst(\strtolower($payload[0])) ." ". \ucfirst(\strtolower($payload[1])). "</h3>";
+    $method = 'get' . \ucfirst(\strtolower($payload[1]));
+    // print_r(HandleData::$method());
+  
+    $data = HandleData::$method();
+
+    echo "
+    <table class='table'>
+      <thead>
+        <tr>
+          <th scope='col'>Field</th>
+          <th scope='col'>Value</th>
+    
+        </tr>
+      </thead>
+      <tbody>
+      
+      ";
+    foreach ($data as $key => $value) {
+        echo '<tr>';
+        echo '<th scope="row">'. \ucfirst(str_replace('_', ' ', \strtolower($key))) .'</th>';
+        echo '<td >'. \ucfirst(\strtolower($value)) .'</td>';
+        echo '</tr>';
+    }
+
+    echo "
+ 
+      </tbody>
+      </table>
+      ";
+}

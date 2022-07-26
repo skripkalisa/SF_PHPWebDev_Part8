@@ -13,15 +13,16 @@ class Profile extends \RedBeanPHP\SimpleModel
     private $created;
     private $updated;
     private $userId;
-    private $accountId;
+
     public function __construct(object $entity = null)
     {
         $this->firstName = $entity->firstName;
         $this->lastName = $entity->lastName;
         $this->role = $entity->role;
-        $this->created = $entity->created;
-        $this->updated = $entity->updated;
+        $this->created = \DateTime::createFromFormat('U', time());
+
+        $this->updated = \DateTime::createFromFormat('U', time());
+
         $this->userId = $entity->userId;
-        $this->accountId = $entity->accountId;
     }
 }

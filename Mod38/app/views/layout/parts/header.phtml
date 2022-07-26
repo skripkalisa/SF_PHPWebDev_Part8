@@ -1,5 +1,5 @@
 <?php
-include_once VIEW  .'auth/utils/formHandler.php';
+// include_once VIEW  .'auth/utils/formHandler.php';
 
 use App\views\auth\utils;
 
@@ -11,8 +11,8 @@ use App\views\auth\utils;
   <nav class="navbar">
     <ul class="menu list">
       <li class="first active"><a href="/">Home</a></li>
-      <?php if (utils\getLoginStatus()): ?>
-      <?php if (utils\isAdmin()): ?>
+      <?php if (utils\HandleAuth::getLoginStatus()): ?>
+      <?php if (utils\HandleAuth::isAdmin()): ?>
       <li><a href="/admin">Admin</a></li>
       <?php endif; ?>
 

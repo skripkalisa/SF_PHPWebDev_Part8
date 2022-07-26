@@ -1,0 +1,31 @@
+<form id="card-form">
+
+  <div class="form-control">
+    <b> Enter Card Name: </b>
+    <input type="text" name="card_name"
+      value="<?php echo $entity->card_name ?? '' ;?>">
+    <div class="form-control-feedback"></div>
+  </div>
+  <div class="form-control">
+    <b> Enter Credit Card Number: </b>
+    <input type="text" name="credit_card_number"
+      value="<?php echo $entity->credit_card_number ?? '' ;?>">
+    <div class="form-control-feedback"></div>
+  </div>
+  <div class="form-control">
+    <b> Set Card Withdraw Limit: </b>
+    <input type="number" name="limit"
+      value="<?php echo $entity->limit ?? '' ;?>">
+    <div class="form-control-feedback"></div>
+  </div>
+
+
+  <input type="hidden" name="token" value="<?=$token?>">
+
+  <button type="submit" name="submit" value="Submit">Submit
+  </button>
+
+</form>
+
+<?php
+                    $_SESSION["CSRF"] = $token;

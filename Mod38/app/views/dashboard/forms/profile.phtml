@@ -1,4 +1,6 @@
 <form id="profile-form">
+
+
   <div class="form-control">
     <b> Enter First Name: </b>
     <input type="text" name="firstname"
@@ -8,7 +10,7 @@
 
   <div class="form-control">
     <b> Enter Last Name: </b>
-    <input type="text" name="lastname" id="lastname"
+    <input type="text" name="lastname"
       value="<?php echo $entity->lastname ?? '' ;?>">
     <div class="form-control-feedback"></div>
   </div>
@@ -17,7 +19,7 @@
     <b> Select Role: </b>
     <input type="radio" name="role" <?php if (isset($entity->role) && $entity->role==="merchant") {
         echo "checked";
-    }?> value="merchant"> Merchant
+    }?> value="merchant" checked="checked"> Merchant
 
     <input type="radio" name="role" <?php if (isset($entity->role) && $entity->role==="webmaster") {
         echo "checked";
@@ -31,12 +33,10 @@
 
   <input type="hidden" name="token" value="<?=$token?>">
 
-  <button type="submit" name="submit" value="Register">Register
+  <button type="submit" name="submit" value="Submit">Submit
   </button>
 
 </form>
 
 <?php
-
-            $_SESSION["CSRF"] = $token;
-      var_dump($payload);
+                $_SESSION["CSRF"] = $token;

@@ -1,8 +1,9 @@
 <?php
 
-namespace App\models;
+namespace App\models\entities;
 
-require_once CORE.'enum.php';
+// require_once CORE.'enum.php';
+use App\core\BasicEnum;
 
 interface IStatus
 {

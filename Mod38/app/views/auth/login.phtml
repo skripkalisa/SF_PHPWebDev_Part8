@@ -1,10 +1,10 @@
 <?php
 
 include_once CORE  .'token.php';
-include_once VIEW  .'auth/utils/formHandler.php';
+
 use App\views\auth\utils;
 
-if (utils\getLoginStatus()) {
+if (utils\HandleAuth::getLoginStatus()) {
     header("location: /dashboard");
     exit;
 }
@@ -42,5 +42,3 @@ if (utils\getLoginStatus()) {
 <?php
 
 $_SESSION["CSRF"] = $token;
-// action="<?php echo htmlspecialchars($_SERVER["REQUEST_URI"]);?>
-<!-- // " method="post" -->

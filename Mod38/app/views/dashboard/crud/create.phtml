@@ -1,0 +1,6 @@
+<?php
+  include_once CORE . 'token.php';
+  if ($payload && $payload[1]) {
+      echo "<h3>". \ucfirst(\strtolower($payload[0])) ." ". \ucfirst(\strtolower($payload[1])). "</h3>";
+      include_once VIEW. 'dashboard/forms/'.\strtolower($payload[1]).'.phtml';
+  }

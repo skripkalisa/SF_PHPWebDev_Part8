@@ -1,6 +1,6 @@
 <?php
 
-namespace App\models;
+namespace App\models\entities;
 
 class Offer extends Status
 {

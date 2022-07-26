@@ -2,7 +2,7 @@
 
 namespace App\core;
 
-include_once VIEW  .'auth/utils/formHandler.php';
+// include_once VIEW  .'auth/utils/formHandler.php';
 
 
 define('CONTROLLERS_NAMESPACE', 'App\\controllers\\');

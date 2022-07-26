@@ -1,21 +1,22 @@
 <?php
+namespace App\models\entities;
 
-namespace App\models;
-
-class Account implements IStatus
+class Account
 {
-    private $_userId;
-    private $_balance;
-    private $_created;
-    private $_updated;
-    private $_status;
+    private $userId;
+    private $profileId;
+    private $balance;
+    private $created;
+    private $updated;
+    private $status;
 
     public function __construct(object $entity = null)
     {
-        $this->_userId = $entity->userId;
-        $this->_balance = $entity->balance;
-        $this->_created = \DateTime::createFromFormat('U', $entity->created);
-        $this->_updated = \DateTime::createFromFormat('U', $entity->updated);
-        $this->_status = $entity->status;
+        $this->userId = $entity->userId;
+        $this->profileId = $entity->profileId;
+        $this->balance = $entity->balance;
+        $this->created = \DateTime::createFromFormat('U', time());
+        $this->updated = \DateTime::createFromFormat('U', time());
+        // $this->status = $entity->status;
     }
 }

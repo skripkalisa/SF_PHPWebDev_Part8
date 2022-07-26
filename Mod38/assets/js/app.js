@@ -11,10 +11,6 @@ function year() {
 year()
 
 async function postData(url = '', data = new FormData()) {
-  // Default options are marked with *
-
-  // console.log(data)
-
   const response = await fetch(url, {
     method: 'POST', // *GET, POST, PUT, DELETE, etc.
     mode: 'cors', // no-cors, *cors, same-origin
@@ -41,17 +37,26 @@ const handleForm = (e, url) => {
       console.log(error)
     })
 }
-var regUrl = '/auth/validate/register'
+
+const regUrl = '/auth/validate/register'
 const regForm = document.querySelector('#register-form')
 
 regForm?.addEventListener('submit', e => handleForm(e, regUrl))
 
-var loginUrl = '/auth/validate/login'
+const loginUrl = '/auth/validate/login'
 const loginForm = document.querySelector('#login-form')
 
 loginForm?.addEventListener('submit', e => handleForm(e, loginUrl))
-// loginForm?.addEventListener('click', e => console.log(e.target))
 
+const profileUrl = '/auth/validate/profile'
+const profileForm = document.querySelector('#profile-form')
+
+profileForm?.addEventListener('submit', e => handleForm(e, profileUrl))
+
+const accountUrl = '/auth/validate/account'
+const accountForm = document.querySelector('#account-form')
+
+accountForm?.addEventListener('submit', e => handleForm(e, accountUrl))
 const success = data => {
   resetErrors()
   modalSuccess(data)

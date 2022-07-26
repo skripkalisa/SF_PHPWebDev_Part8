@@ -1,0 +1,35 @@
+<?php
+namespace App\views\dashboard\forms;
+
+use App\views\auth\utils;
+
+if (utils\HandleData::getProfile()) { ?>
+<form id="account-form">
+
+  <div class="form-control">
+    <b> Enter Account Name: </b>
+    <input type="text" name="account_name"
+      value="<?php echo $entity->account_name ?? '' ;?>">
+    <div class="form-control-feedback"></div>
+  </div>
+
+  <div class="form-control">
+    <b> Set Account Balance: </b>
+    <input type="number" name="balance"
+      value="<?php echo $entity->balance ?? '' ;?>">
+    <div class="form-control-feedback"></div>
+  </div>
+
+
+  <input type="hidden" name="token" value="<?=$token?>">
+
+  <button type="submit" name="submit" value="Submit">Submit
+  </button>
+
+</form>
+
+<?php
+} else {
+    echo "You must create a profile before you can create an account.";
+}
+$_SESSION["CSRF"] = $token;
